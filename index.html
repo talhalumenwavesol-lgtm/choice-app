@@ -3,119 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Choice Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>A Special Surprise ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --primary-text: #333;
-            --accent-color: #6c5ce7;
-            --warning-color: #ff7675;
+            --primary-rose: #ff4d6d;
+            --soft-cream: #fff5f6;
+            --gold: #d4af37;
+            --text-gray: #5a5a5a;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f6 0%, #ffdee9 100%);
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: var(--primary-text);
         }
 
-        /* Mobile Container */
+        /* Animated Background Petals */
+        .petal {
+            position: absolute;
+            background-color: #ffb7c5;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
         .container {
-            width: 90%;
-            max-width: 400px;
+            width: 85%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 40px 25px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             text-align: center;
-            padding: 20px;
+            z-index: 10;
+            position: relative;
         }
 
-        h1 { font-weight: 600; margin-bottom: 30px; }
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary-rose);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
 
-        /* Card Styles */
-        .options-list {
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* The New Decent Options */
+        .option-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
-        .option-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .gift-card {
+            background: white;
+            padding: 22px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid transparent;
-            font-weight: 600;
-            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .option-card:active {
-            transform: scale(0.95);
-            background-color: #f0edff;
-            border-color: var(--accent-color);
+        .gift-card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-rose);
         }
 
-        .warning-text {
-            margin-top: 25px;
+        .gift-card h3 {
+            margin: 0;
+            color: var(--primary-rose);
+            font-size: 1.2rem;
+        }
+
+        .gift-card p {
+            margin: 5px 0 0;
             font-size: 0.85rem;
-            color: var(--warning-color);
-            opacity: 0.8;
+            color: #888;
         }
 
-        /* Success Screen */
-        #success-screen {
-            display: none; /* Hidden by default */
-            animation: fadeIn 0.5s ease-out;
+        .warning-label {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #b0b0b0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .success-msg {
-            font-size: 1.5rem;
-            font-weight: 600;
-            line-height: 1.4;
-            color: var(--accent-color);
+        /* Success State */
+        #success-page {
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .big-heart {
+            font-size: 80px;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .congrats-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.4rem;
+            color: var(--primary-rose);
+            margin-bottom: 15px;
+        }
+
+        .personal-msg {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="selection-screen">
-            <h1>Choose One Option</h1>
+    <div class="container" id="main-container">
+        <div id="selection-page">
+            <h1>Just for You 🌸</h1>
+            <p class="subtitle">If you could have one moment with me right now, what would you choose?</p>
             
-            <div class="options-list">
-                <div class="option-card" onclick="handleChoice()">Option 1: Hold Hand</div>
-                <div class="option-card" onclick="handleChoice()">Option 2: Hold Hair</div>
-                <div class="option-card" onclick="handleChoice()">Option 3: Hold Cheeks</div>
+            <div class="option-wrapper">
+                <div class="gift-card" onclick="celebrate('A Forehead Kiss')">
+                    <h3>✨ A Forehead Kiss</h3>
+                    <p>A promise of respect and care, forever.</p>
+                </div>
+
+                <div class="gift-card" onclick="celebrate('A Slow Dance')">
+                    <h3>🎵 A Slow Dance</h3>
+                    <p>Just you and me, the world can wait.</p>
+                </div>
+
+                <div class="gift-card" onclick="celebrate('Infinite Warm Hugs')">
+                    <h3>🫂 Infinite Warm Hugs</h3>
+                    <p>Your safest place in the whole world.</p>
+                </div>
             </div>
 
-            <p class="warning-text">
-                There is no 4th option. Please choose only from the options above.
-            </p>
+            <div class="warning-label">— There is no 4th option for a reason —</div>
         </div>
 
-        <div id="success-screen">
-            <div class="success-msg">
-                🎉 Congratulations!<br>You won, Talha.<br>Aapka ho gaya.
-            </div>
+        <div id="success-page">
+            <span class="big-heart">❤️</span>
+            <div class="congrats-text">Congratulations!</div>
+            <p class="personal-msg">
+                "You won, Talha. Aapka ho gaya." <br><br>
+                You chose <strong id="final-choice" style="color:var(--primary-rose)"></strong>.<br>
+                This isn't just a game, it's a promise. 
+            </p>
         </div>
     </div>
 
     <script>
-        function handleChoice() {
-            // Hide the selection screen
-            document.getElementById('selection-screen').style.display = 'none';
-            // Show the success screen
-            document.getElementById('success-screen').style.display = 'block';
+        // Create falling petals
+        function createPetals() {
+            const container = document.body;
+            for (let i = 0; i < 25; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.width = Math.random() * 15 + 10 + 'px';
+                petal.style.height = petal.style.width;
+                petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+                petal.style.delay = Math.random() * 5 + 's';
+                container.appendChild(petal);
+            }
+        }
+        createPetals();
+
+        function celebrate(choice) {
+            // Smooth Transition
+            document.getElementById('selection-page').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('selection-page').style.display = 'none';
+                document.getElementById('success-page').style.display = 'block';
+                document.getElementById('final-choice').innerText = choice;
+                
+                // Extra effect: More petals on win
+                for(let i=0; i<30; i++) {
+                    setTimeout(createPetals, i * 100);
+                }
+            }, 500);
         }
     </script>
 </body>
