@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Choice Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --primary-text: #333;
+            --accent-color: #6c5ce7;
+            --warning-color: #ff7675;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--primary-text);
+        }
+
+        /* Mobile Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 { font-weight: 600; margin-bottom: 30px; }
+
+        /* Card Styles */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            border: 2px solid transparent;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .option-card:active {
+            transform: scale(0.95);
+            background-color: #f0edff;
+            border-color: var(--accent-color);
+        }
+
+        .warning-text {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: var(--warning-color);
+            opacity: 0.8;
+        }
+
+        /* Success Screen */
+        #success-screen {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-msg {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="selection-screen">
+            <h1>Choose One Option</h1>
+            
+            <div class="options-list">
+                <div class="option-card" onclick="handleChoice()">Option 1: Hold Hand</div>
+                <div class="option-card" onclick="handleChoice()">Option 2: Hold Hair</div>
+                <div class="option-card" onclick="handleChoice()">Option 3: Hold Cheeks</div>
+            </div>
+
+            <p class="warning-text">
+                There is no 4th option. Please choose only from the options above.
+            </p>
+        </div>
+
+        <div id="success-screen">
+            <div class="success-msg">
+                🎉 Congratulations!<br>You won, Talha.<br>Aapka ho gaya.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleChoice() {
+            // Hide the selection screen
+            document.getElementById('selection-screen').style.display = 'none';
+            // Show the success screen
+            document.getElementById('success-screen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
