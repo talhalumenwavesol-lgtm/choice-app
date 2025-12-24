@@ -9,31 +9,21 @@
         :root {
             --primary-rose: #ff4d6d;
             --soft-cream: #fff5f6;
-            --gold: #d4af37;
             --text-gray: #5a5a5a;
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #fff5f6 0%, #ffdee9 100%);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden; display: flex; justify-content: center; align-items: center;
         }
 
-        /* Animated Background Petals */
+        /* Falling Petals Animation */
         .petal {
-            position: absolute;
-            background-color: #ffb7c5;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: fall linear infinite;
+            position: absolute; background-color: #ffb7c5;
+            border-radius: 150% 0 150% 0; opacity: 0.7;
+            pointer-events: none; animation: fall linear infinite;
         }
 
         @keyframes fall {
@@ -42,180 +32,113 @@
         }
 
         .container {
-            width: 85%;
-            max-width: 450px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 40px 25px;
-            border-radius: 40px;
+            width: 85%; max-width: 450px;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px);
+            padding: 40px 25px; border-radius: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            text-align: center;
-            z-index: 10;
-            position: relative;
+            text-align: center; z-index: 10; position: relative;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            color: var(--primary-rose);
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--primary-rose); font-size: 2.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1rem; color: var(--text-gray); margin-bottom: 30px; }
 
-        .subtitle {
-            font-size: 1rem;
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        /* The New Decent Options */
-        .option-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .option-wrapper { display: flex; flex-direction: column; gap: 15px; }
 
         .gift-card {
-            background: white;
-            padding: 22px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
+            background: white; padding: 20px; border-radius: 25px;
+            cursor: pointer; transition: 0.4s; border: 2px solid transparent;
             box-shadow: 0 8px 20px rgba(255, 77, 109, 0.1);
-            position: relative;
-            overflow: hidden;
         }
 
-        .gift-card:hover {
-            transform: scale(1.03);
-            border-color: var(--primary-rose);
-        }
+        .gift-card:active { transform: scale(0.95); }
+        .gift-card h3 { margin: 0; color: var(--primary-rose); font-size: 1.2rem; }
+        .gift-card p { margin: 5px 0 0; font-size: 0.85rem; color: #888; }
 
-        .gift-card h3 {
-            margin: 0;
-            color: var(--primary-rose);
-            font-size: 1.2rem;
-        }
+        #success-page { display: none; animation: fadeIn 0.8s ease forwards; }
+        .big-heart { font-size: 80px; animation: pulse 1.5s infinite; display: inline-block; }
+        
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .gift-card p {
-            margin: 5px 0 0;
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        .warning-label {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: #b0b0b0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Success State */
-        #success-page {
-            display: none;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .big-heart {
-            font-size: 80px;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .congrats-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.4rem;
-            color: var(--primary-rose);
-            margin-bottom: 15px;
-        }
-
-        .personal-msg {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            line-height: 1.6;
-            font-style: italic;
-        }
+        #loading { display: none; margin-top: 15px; font-size: 0.9rem; color: var(--primary-rose); font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-container">
+    <div class="container">
         <div id="selection-page">
             <h1>Just for You 🌸</h1>
-            <p class="subtitle">If you could have one moment with me right now, what would you choose?</p>
+            <p class="subtitle">Pick a moment you'd love to share with me...</p>
             
             <div class="option-wrapper">
                 <div class="gift-card" onclick="celebrate('A Forehead Kiss')">
                     <h3>✨ A Forehead Kiss</h3>
-                    <p>A promise of respect and care, forever.</p>
+                    <p>A promise of respect and care.</p>
                 </div>
-
                 <div class="gift-card" onclick="celebrate('A Slow Dance')">
                     <h3>🎵 A Slow Dance</h3>
                     <p>Just you and me, the world can wait.</p>
                 </div>
-
                 <div class="gift-card" onclick="celebrate('Infinite Warm Hugs')">
                     <h3>🫂 Infinite Warm Hugs</h3>
-                    <p>Your safest place in the whole world.</p>
+                    <p>Your safest place in the world.</p>
                 </div>
             </div>
-
-            <div class="warning-label">— There is no 4th option for a reason —</div>
+            <div id="loading">Sending your choice to my heart... 💖</div>
         </div>
 
         <div id="success-page">
             <span class="big-heart">❤️</span>
-            <div class="congrats-text">Congratulations!</div>
-            <p class="personal-msg">
+            <div style="font-family:'Dancing Script'; font-size:2.4rem; color:var(--primary-rose);">Done!</div>
+            <p style="color:var(--text-gray); line-height:1.6; margin-top: 20px;">
                 "You won, Talha. Aapka ho gaya." <br><br>
                 You chose <strong id="final-choice" style="color:var(--primary-rose)"></strong>.<br>
-                This isn't just a game, it's a promise. 
+                This isn't just a game, it's a promise. 😉
             </p>
         </div>
     </div>
 
     <script>
-        // Create falling petals
-        function createPetals() {
-            const container = document.body;
-            for (let i = 0; i < 25; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.width = Math.random() * 15 + 10 + 'px';
-                petal.style.height = petal.style.width;
-                petal.style.animationDuration = Math.random() * 5 + 5 + 's';
-                petal.style.delay = Math.random() * 5 + 's';
-                container.appendChild(petal);
-            }
-        }
-        createPetals();
+        // Your Formspree ID is now integrated!
+        const FORMSPREE_ID = "xkowavpl"; 
 
         function celebrate(choice) {
-            // Smooth Transition
-            document.getElementById('selection-page').style.opacity = '0';
-            setTimeout(() => {
+            // Show loading text
+            document.getElementById('loading').style.display = 'block';
+
+            // Send Notification to your Email via Formspree
+            fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    Choice: choice,
+                    Message: "She picked an option!",
+                    Time: new Date().toLocaleString()
+                })
+            }).finally(() => {
+                // Change UI even if it takes time
                 document.getElementById('selection-page').style.display = 'none';
                 document.getElementById('success-page').style.display = 'block';
                 document.getElementById('final-choice').innerText = choice;
                 
-                // Extra effect: More petals on win
-                for(let i=0; i<30; i++) {
-                    setTimeout(createPetals, i * 100);
-                }
-            }, 500);
+                // Burst of extra petals
+                for(let i=0; i<40; i++) { setTimeout(createPetals, i * 100); }
+            });
         }
+
+        function createPetals() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = Math.random() * 15 + 10 + 'px';
+            petal.style.height = petal.style.width;
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(petal);
+        }
+        
+        // Initial petals on load
+        for (let i = 0; i < 20; i++) { createPetals(); }
     </script>
 </body>
 </html>
